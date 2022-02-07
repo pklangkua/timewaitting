@@ -1,0 +1,51 @@
+﻿@model SettingModel;
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    int d = 20;
+    int i = 1;
+    IEnumerable<SettingModel> displaydata = ViewData["Setdate"] as IEnumerable<SettingModel>;
+
+}
+<div class="page-content">
+    <section class="row">
+        <div class="col-12 col-lg-12 ">
+            <form asp-action="Index">
+                <div class="card">
+                    <div class="card-header">
+                        <h4>ตั้งค่าวันที่สิ้นสุดการส่งข้อมูล</h4>
+                    </div>
+                    <div class="card-body">
+                        <div class="row justify-content-center">
+                            <h6>
+                                <span class="text-danger">
+                                    วันสุดท้ายของการส่งข้อมูล วันที่ : @foreach (var item in displaydata)
+                                    {
+                                        @item.setdate
+                                        <input type="hidden" asp-for="id" value="@item.id" />
+                                    } ของทุกเดือน
+                                </span>
+                            </h6>
+                            <div class="col-4">
+                                <select class="form-select" asp-for="setdate">
+                                    <option value="" selected disabled>กรุณาเลือกวันที่</option>
+                                    @while (i <= d)
+                                    {
+                                        <option value="@i">@i</option>
+                                        i++;
+                                    }
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row justify-content-md-center">
+                        <div class="col-md-1 ">
+                            
+                            <input class="btn btn-success" type="submit" value="บันทึก" />
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </section>
+</div>

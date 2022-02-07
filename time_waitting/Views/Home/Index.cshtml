@@ -1,0 +1,748 @@
+﻿@model SumpatienModel
+@{
+    IEnumerable<hospModel> hospdata = ViewData["hosp"] as IEnumerable<hospModel>;
+    IEnumerable<cmonth> displaydata = ViewData["cmonth"] as IEnumerable<cmonth>;
+    IEnumerable<SumpatienModel> Sumpatien = ViewData["Sumpatien"] as IEnumerable<SumpatienModel>;
+}
+@foreach (var p in Sumpatien)
+{
+    ViewData["pn"] = Convert.ToDecimal(p.t_newpatien).ToString("#,##0"); 
+    ViewData["po"] = Convert.ToDecimal(p.t_oldpatien).ToString("#,##0"); 
+    ViewData["pa"] = Convert.ToDecimal(p.t_admit).ToString("#,##0"); 
+    ViewData["st"] = p.sumtime;
+
+}
+@{
+    int oldyear = 2563;
+    int years = (int)ViewData["Y"];
+}
+
+
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        Highcharts.setOptions({
+            colors: ['#009933', '#FF66CC']
+        });
+                        Highcharts.chart('ChartAVG', {
+                        chart: {
+                                type: 'column'
+                        },
+                        title: {
+                            text: ''
+                        },
+                        subtitle: {
+                            text: ''
+                        },
+                            xAxis: {
+                                type: 'category'
+                            //categories: [
+                            //    'ระยะเวลาลงทะเบียนที่ห้องบัตร',
+                            //    'ระยะเวลาการคัดกรอง',
+                            //    'ระยะเวลารอพบแพทย์',
+                            //    'ระยะเวลาในห้องตรวจแพทย์',
+                            //    'ระยะเวลาหลังพบแพทย์จนถึงยื่นใบสั่งยา',
+                            //    'ระยะเวลารอรับยา',
+                            //    'ระยะเวลารับยาเดิม',
+                            //    'ระยะเวลารอรับยาเดิม',
+                            //    'ระยะเวลากรณีได้รับ intervention อื่นๆ (บำบัดรักษา ฟื้นฟูทางจิต สังคม)',
+                            //    'ระยะเวลาในการจัดทำ/บริการเพื่อรับไว้รักษา (Admit)'
+                            //],
+                            //crosshair: true
+                        },
+                        yAxis: {
+                            min: 0,
+                            title: {
+                                text: 'เวลาเฉลี่ย(นาที)'
+                            }
+                        },
+                        tooltip: {
+                            headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+                            pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+                                '<td style="padding:0"><b>{point.y:.1f} นาที</b></td></tr>',
+                            footerFormat: '</table>',
+                            shared: true,
+                            useHTML: true
+                        },
+                        plotOptions: {
+                            column: {
+                                pointPadding: 0.2,
+                                borderWidth: 0
+                            }
+                        },
+                        series: [{
+                            name: @Html.Raw(ViewData["Date1"]),
+                            data: @Html.Raw(ViewBag.DataPointsYear1),
+
+                        }, {
+                            name: @Html.Raw(ViewData["Date2"]),
+                            data: @Html.Raw(ViewBag.DataPointsYear2),
+
+                        },]
+                    });
+        });
+</script>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        Highcharts.setOptions({
+            colors: ['#058DC7', '#50B432', '#ED561B', '#DDDF00', '#24CBE5', '#64E572', '#FF9655',
+                '#FFF263', '#6AF9C4']
+        });
+                        Highcharts.chart('ChartAVG2', {
+                        chart: {
+                                type: 'column'
+                        },
+                        title: {
+                            text: ''
+                        },
+                        subtitle: {
+                            text: ''
+                        },
+                            xAxis: {
+                                type: 'category'
+                            //categories: [
+                            //    'ระยะเวลาลงทะเบียนที่ห้องบัตร',
+                            //    'ระยะเวลาการคัดกรอง',
+                            //    'ระยะเวลารอพบแพทย์',
+                            //    'ระยะเวลาในห้องตรวจแพทย์',
+                            //    'ระยะเวลาหลังพบแพทย์จนถึงยื่นใบสั่งยา',
+                            //    'ระยะเวลารอรับยา',
+                            //    'ระยะเวลารับยาเดิม',
+                            //    'ระยะเวลารอรับยาเดิม',
+                            //    'ระยะเวลากรณีได้รับ intervention อื่นๆ (บำบัดรักษา ฟื้นฟูทางจิต สังคม)',
+                            //    'ระยะเวลาในการจัดทำ/บริการเพื่อรับไว้รักษา (Admit)'
+                            //],
+                            //crosshair: true
+                        },
+                        yAxis: {
+                            min: 0,
+                            title: {
+                                text: 'เวลาเฉลี่ย(นาที)'
+                            }
+                        },
+                        tooltip: {
+                            headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+                            pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+                                '<td style="padding:0"><b>{point.y:.1f} นาที</b></td></tr>',
+                            footerFormat: '</table>',
+                            shared: true,
+                            useHTML: true
+                        },
+                        plotOptions: {
+                            column: {
+                                pointPadding: 0.2,
+                                borderWidth: 0
+                            }
+                        },
+                        series: [{
+                            name: @Html.Raw(ViewData["Date1"]),
+                            data: @Html.Raw(ViewBag.DataPointsYear3),
+
+                        }, {
+                            name: @Html.Raw(ViewData["Date2"]),
+                            data: @Html.Raw(ViewBag.DataPointsYear4),
+
+                        },]
+                    });
+        });
+</script>
+
+<script>
+              document.addEventListener('DOMContentLoaded', function () {
+                        Highcharts.chart('ChartLine', {
+                        chart: {
+                            type: 'spline'
+                        },
+                        title: {
+                            text: ''
+                        },
+                        subtitle: {
+                            text: ''
+                        },
+                            xAxis: {
+                                type: 'category'
+
+                        },
+                        yAxis: {
+                            min: 0,
+                            title: {
+                                text: 'เวลาเฉลี่ย(นาที)'
+                            }
+                        },
+                        tooltip: {
+                            headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+                            pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+                                '<td style="padding:0"><b>{point.y:.1f} นาที</b></td></tr>',
+                            footerFormat: '</table>',
+                            shared: true,
+                            useHTML: true
+                        },
+                        plotOptions: {
+                            column: {
+                                pointPadding: 0.2,
+                                borderWidth: 0
+                            }
+                            },
+                        series: [{
+                             name: 'ผู้ป่วยนอกใหม่',
+                             data:  @Html.Raw(ViewBag.DataPoints1),
+                         }, {
+                             name: 'ผู้ป่วยนอกเก่า',
+                             data:  @Html.Raw(ViewBag.DataPoints2),
+                         }]
+                        @*series: [{
+                            name: 'ผู้ป่วยนอกใหม่',
+                            data: @Html.Raw(ViewBag.DataPoints1),
+
+                        }]*@
+                    });
+        });
+</script>
+
+<script>
+
+    document.addEventListener('DOMContentLoaded', function () {
+        const chart = Highcharts.chart('Chart14', {
+            chart: {
+                type: 'column'
+            },
+            title: {
+                text: ''
+            },
+            subtitle: {
+                text: ''
+            },
+            accessibility: {
+                announceNewData: {
+                    enabled: true
+                }
+            },
+            xAxis: {
+                type: 'category'
+            },
+            yAxis: {
+                title: {
+                    text: 'เวลาเฉลี่ย(นาที)'
+                }
+
+            },
+            legend: {
+                enabled: false
+            },
+            plotOptions: {
+                series: {
+                    borderWidth: 0,
+                    dataLabels: {
+                        enabled: true,
+                        format: '{point.y:.2f}'
+                    }
+                }
+            },
+
+            tooltip: {
+                headerFormat: '',
+                pointFormat: '<span style="color:{point.color}">{point.name}</span>: <b>{point.y:.2f}</b><br/>'
+            },
+
+            series: [
+                {
+                    data:  @Html.Raw(ViewBag.DataPointsDept),
+                },
+            ]
+
+        });
+    });
+
+    document.addEventListener('DOMContentLoaded', function () {
+        const chart = Highcharts.chart('Chart6', {
+            chart: {
+                type: 'column'
+            },
+            title: {
+                text: ''
+            },
+            subtitle: {
+                text: ''
+            },
+            accessibility: {
+                announceNewData: {
+                    enabled: true
+                }
+            },
+            xAxis: {
+                type: 'category'
+            },
+            yAxis: {
+                title: {
+                    text: 'เวลาเฉลี่ย(นาที)'
+                }
+
+            },
+            legend: {
+                enabled: false
+            },
+            plotOptions: {
+                series: {
+                    borderWidth: 0,
+                    dataLabels: {
+                        enabled: true,
+                        format: '{point.y:.2f}'
+                    }
+                }
+            },
+
+            tooltip: {
+                headerFormat: '',
+                pointFormat: '<span style="color:{point.color}">{point.name}</span>: <b>{point.y:.2f}</b><br/>'
+            },
+
+            series: [
+                {
+                    data:  @Html.Raw(ViewBag.DataPointsDept2),
+                },
+            ]
+
+        });
+    });
+
+</script>  @*ค่าเฉลี่ยของระยะเวลาบริการผู้ป่วยจิตเวช ในหน่วยงานจิตเวชทั่วไป 14 หน่วยงาน จิตเวชเด็กและวัยรุ่น 6 หน่วยงาน*@
+
+<script>
+     document.addEventListener('DOMContentLoaded', function () {
+         const chart = Highcharts.chart('ChartSt14', {
+             chart: {
+                 type: 'column'
+             },
+             title: {
+                 text: ''
+             },
+             xAxis: {
+                 type: 'category'
+             },
+             yAxis: {
+                 min: 0,
+                 title: {
+                     text: 'ระยะเวลาเฉลี่ย(นาที)'
+                 },
+                 stackLabels: {
+                     enabled: true,
+                     style: {
+                         fontWeight: 'bold',
+                         fontSize : 10 ,
+                         color: ( // theme
+                             Highcharts.defaultOptions.title.style &&
+                             Highcharts.defaultOptions.title.style.color
+                         ) || 'gray'
+                     }
+                 }
+             },
+             legend: {
+                 align: 'right',
+                 x: -30,
+                 verticalAlign: 'top',
+                 y: 1,
+                 floating: true,
+                 //backgroundColor:
+                 //    Highcharts.defaultOptions.legend.backgroundColor || 'white',
+                 borderColor: '#CCC',
+                 borderWidth: 0,
+                 shadow: false
+             },
+             tooltip: {
+                 style: {
+                     fontSize: 12
+                 },
+                 headerFormat: '<b>{point.key}</b><br/>',
+                 pointFormat: '{series.name}: {point.y}<br/>Total: {point.stackTotal}'
+             },
+             plotOptions: {
+                 style: {
+                     fontSize: 8
+                 },
+                 column: {
+                     stacking: 'normal',
+                     dataLabels: {
+                         enabled: true
+                     }
+                 }
+             },
+             series: [{
+                 name: 'ผู้ป่วยนอกใหม่',
+                 data:  @Html.Raw(ViewBag.DataPointsDept_new1),
+             }, {
+                 name: 'ผู้ป่วยนอกเก่า',
+                 data:  @Html.Raw(ViewBag.DataPointsDept_new2),
+             }]
+         });
+        });
+</script>
+<script>
+     document.addEventListener('DOMContentLoaded', function () {
+         const chart = Highcharts.chart('ChartSt6', {
+             chart: {
+                 type: 'column'
+             },
+             title: {
+                 text: ''
+             },
+             xAxis: {
+                 type: 'category'
+             },
+             yAxis: {
+                 min: 0,
+                 title: {
+                     text: 'ระยะเวลาเฉลี่ย(นาที)'
+                 },
+                 stackLabels: {
+                     enabled: true,
+                     style: {
+                         fontWeight: 'bold',
+                         color: ( // theme
+                             Highcharts.defaultOptions.title.style &&
+                             Highcharts.defaultOptions.title.style.color
+                         ) || 'gray'
+                     }
+                 }
+             },
+             legend: {
+                 align: 'right',
+                 x: -30,
+                 verticalAlign: 'top',
+                 y: 1,
+                 floating: true,
+                 //backgroundColor:
+                 //    Highcharts.defaultOptions.legend.backgroundColor || 'white',
+                 borderColor: '#CCC',
+                 borderWidth: 0,
+                 shadow: false
+             },
+             tooltip: {
+                 headerFormat: '<b>{point.key}</b><br/>',
+                 pointFormat: '{series.name}: {point.y}<br/>Total: {point.stackTotal}'
+             },
+             plotOptions: {
+                 column: {
+                     stacking: 'normal',
+                     dataLabels: {
+                         enabled: true
+                     }
+                 }
+             },
+             series: [{
+                 name: 'ผู้ป่วยนอกใหม่',
+                 data:  @Html.Raw(ViewBag.DataPointsDept2_new1),
+             }, {
+                 name: 'ผู้ป่วยนอกเก่า',
+                 data:  @Html.Raw(ViewBag.DataPointsDept2_new2),
+             }]
+         });
+        });
+</script>
+
+<form asp-action="Index">
+    <div class="card mt-5">
+        <div class="card-header">
+            <h4 class="card-title">DashBoard</h4>
+        </div>
+        <div class="card-body">
+            <div class="row">
+
+                <div class="col-md-6">
+                    <div class="form-group row align-items-center">
+                        <div class="col-lg-3 col-5">
+                            <label class="control-label">ปีงบประมาณ:</label>
+                        </div>
+                        <div class="col-lg-9 col-7">
+                            <select asp-for="t_year" class="form-select" name="t_year" id="t_year">
+                                <option value="0" selected>ทั้งหมด</option>
+                                @while (oldyear <= years)
+                                {
+                                    <option value="@years">@years</option>
+                                    years--;
+                                }
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group row align-items-center">
+                        <div class="col-lg-2 col-3">
+                            <label class="control-label">เดือน:</label>
+                        </div>
+                        <div class="col-lg-10 col-9">
+                            <select asp-for="t_month" class="form-select" name="t_month" id="t_month">
+                                <option value="0" selected>ทั้งหมด</option>
+                                @foreach (var item in displaydata)
+                                {
+                                    <option value="@item.m_id">@item.m_name</option>
+                                }
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row justify-content-md-center">
+                <div class="col-md-1 ">
+
+                    <input class="btn btn-light-success" type="submit" value="ค้นหา" />
+
+                </div>
+            </div>
+
+        </div>
+    </div> @*Dash Board*@
+
+    <div class="page-content">
+        <section class="row">
+            <div class="col-6 col-lg-3 col-md-6">
+                <div class="card">
+                    <div class="card-body px-3 py-4-5">
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="stats-icon purple">
+                                    <i class="iconly-boldProfile"></i>
+                                </div>
+                            </div>
+                            <div class="col-md-8">
+                                <h6 class="text-muted font-semibold">จำนวนผู้ป่วยนอกเก่า</h6>
+                                <h6 class="font-extrabold mb-0">@ViewData["po"]</h6>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-6 col-lg-3 col-md-6">
+                <div class="card">
+                    <div class="card-body px-3 py-4-5">
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="stats-icon blue">
+                                    <i class="iconly-boldProfile"></i>
+                                </div>
+                            </div>
+                            <div class="col-md-8">
+                                <h6 class="text-muted font-semibold">จำนวนผู้ป่วยนอกใหม่</h6>
+                                <h6 class="font-extrabold mb-0">@ViewData["pn"]</h6>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-6 col-lg-3 col-md-6">
+                <div class="card">
+                    <div class="card-body px-3 py-4-5">
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="stats-icon green">
+                                    <i class="iconly-boldProfile"></i>
+                                </div>
+                            </div>
+                            <div class="col-md-8">
+                                <h6 class="text-muted font-semibold">จำนวนผู้ป่วยที่รับไว้รักษา</h6>
+                                <h6 class="font-extrabold mb-0">@ViewData["pa"]</h6>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-6 col-lg-3 col-md-6">
+                <div class="card">
+                    <div class="card-body px-3 py-4-5">
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="stats-icon red">
+                                    <i class="iconly-boldProfile"></i>
+                                </div>
+                            </div>
+                            <div class="col-md-8">
+                                <h6 class="text-muted font-semibold">ระยะเวลาบริการเฉลี่ย</h6>
+                                <h6 class="font-extrabold mb-0">@ViewData["st"]</h6>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </section>
+    </div>  @* 4 box Dashboard*@
+
+    @*<div class="page-content">
+            <section class="row">
+                <div class="col-12 col-lg-12 ">
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="card">
+                                <div class="card-body px-3 py-4-5">
+                                    <div class="row">
+                                        <div class="card">
+                                            <div class="card-header">
+                                                <h4>ค่าเฉลี่ยของระยะเวลาบริการผู้ป่วยจิตเวช</h4>
+                                                <p>เปรียบเทียบปีงบประมาณ</p>
+                                            </div>
+                                            <div class="card-body">
+                                                <div class="card-body">
+                                                    <div id="ChartSt" style="width:100%; height:400px;"></div>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </section>
+        </div>*@
+    @*ค่าเฉลี่ยของระยะเวลาบริการผู้ป่วยจิตเวช รายเดือน*@
+
+    <div class="page-content">
+        <section class="row">
+            <div class="col-12 col-lg-6 ">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="card-body px-3 py-4-5">
+                                <div class="row">
+                                    <div class="card-header">
+                                        <h4>ค่าเฉลี่ยของระยะเวลาบริการผู้ป่วยจิตเวช ผู้ป่วยนอกเก่า</h4>
+                                        <p>เปรียบเทียบปีงบประมาณ</p>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="card-body">
+                                            <div id="ChartAVG" style="width:100%; height:400px;"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 col-lg-6 ">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="card-body px-3 py-4-5">
+                                <div class="row">
+                                    <div class="card-header">
+                                        <h4>ค่าเฉลี่ยของระยะเวลาบริการผู้ป่วยจิตเวช ผู้ป่วยนอกใหม่</h4>
+                                        <p>เปรียบเทียบปีงบประมาณ</p>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="card-body">
+                                            <div id="ChartAVG2" style="width:100%; height:400px;"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </section>
+    </div>
+
+    <div class="page-content">
+        <section class="row">
+            <div class="col-12 col-lg-12 ">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="card-body px-3 py-4-5">
+                                <div class="row">
+                                    <div class="card-header">
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <h4>แนวโน้มค่าเฉลี่ยของระยะเวลาบริการผู้ป่วยจิตเวช</h4>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group row align-items-center">
+                                                    <div class="col-lg-2 col-3">
+                                                        <label class="col-form-label">จุดบริการ: </label>
+                                                    </div>
+                                                    <div class="col-lg-10 col-9">
+                                                        <select asp-for="point" class="form-select" name="point" onchange="this.form.submit()">
+                                                            <option value="0" selected>ทุกจุดบริการ</option>
+                                                            <option value="t_card">จุดลงทะเบียนที่ห้องบัตร</option>
+                                                            <option value="t_screen">จุดการคัดกรอง</option>
+                                                            <option value="t_waitdoc">จุดรอพบแพทย์</option>
+                                                            <option value="t_roomdoc">จุดในห้องตรวจแพทย์</option>
+                                                            <option value="t_prescription">จุดหลังพบแพทย์</option>
+                                                            <option value="t_waitmed">ระยะเวลารอการชำระเงิน</option>
+                                                            <option value="t_med">จุดรับยา</option>
+                                                            <option value="t_oldmed">จุดรอรับยาเดิม</option>
+                                                            <option value="t_inter">จุดกรณีได้รับ intervention อื่นๆ</option>
+                                                            <option value="t_prepare_admit">จุดการจัดทำบริการเพื่อรับไว้รักษา (Admit)</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="card-body">
+                                        <div id="ChartLine" style="height: 400px; width: 100%;"></div>
+                                        @*<div id="chart-profile-visit"></div>*@
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div> @*แนวโน้มค่าเฉลี่ยของระยะเวลาบริการผู้ป่วยจิตเวช*@
+
+    <div class="page-content">
+        <section class="row">
+            <div class="col-12 col-lg-6 ">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="card-body px-3 py-4-5">
+                                <div class="row">
+                                    <div class="card-header">
+                                        <h4>ค่าเฉลี่ยของระยะเวลาบริการผู้ป่วยจิตเวช</h4>
+                                        <p>ในหน่วยงานจิตเวชทั่วไป 14 หน่วยงาน</p>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="card-body">
+                                            @*<div id="chartContainerDept" style="height: 370px; width: 100%;"></div>*@
+                                            <div id="ChartSt14" style="width:100%; height:400px;"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 col-lg-6 ">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="card-body px-3 py-4-5">
+                                <div class="row">
+                                    <div class="card-header">
+                                        <h4>ค่าเฉลี่ยของระยะเวลาบริการผู้ป่วยจิตเวช</h4>
+                                        <p>ในหน่วยงานจิตเวชเด็กและวัยรุ่น 6 หน่วยงาน</p>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="card-body">
+                                            <div id="ChartSt6" style="width:100%; height:400px;"></div>
+                                            @*<div id="chartContainerDept2" style="height: 370px; width: 100%;"></div>*@
+                                            @*<div id="chart-profile-visit4"></div>*@
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </section>
+    </div>  @*ค่าเฉลี่ยของระยะเวลาบริการผู้ป่วยจิตเวช ในหน่วยงานจิตเวชทั่วไป 14 หน่วยงาน จิตเวชเด็กและวัยรุ่น 6 หน่วยงาน*@
+</form>

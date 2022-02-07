@@ -1,0 +1,249 @@
+﻿@model time_waitting.Models.timeWaittingModel
+
+@{
+    ViewData["Title"] = "Detail";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    IEnumerable<cmonth> displaydata = ViewData["cmonth"] as IEnumerable<cmonth>;
+}
+
+
+
+<style>
+    table, th, td {
+        border: 1px solid;
+        border-collapse: collapse;
+    }
+</style>
+<div class="card mt-5">
+    <div class="card-header">
+        <h4 class="card-title">แบบรายงานข้อมูลลดระยะเวลาการบริการผู้ป่วยจิตเวชของหน่วยบริการจิตเวช</h4>
+    </div>
+    <div class="card-body">
+        <div class="breadcomb-area">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                        <div class="breadcomb-list">
+                            <form asp-action="Add">
+                                <div class="row">
+                                    <div>
+                                        <label class="control-label">หน่วยงาน: @Model.hname</label>
+
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <div class="form-group row align-items-center">
+                                                <div class="col-lg-3 col-3">
+                                                    <label class="col-form-label">ข้อมูลเดือน: </label>
+                                                </div>
+                                                <div class="col-lg-9 col-9">
+                                                    <input class="form-control" type="text" asp-for="m_name" readonly />
+                                                    @*<input class="form-control" type="text"  value="@ViewData["Month"].ToString()"  readonly />*@
+                                                    <input class="form-control" type="hidden" asp-for="t_month" value="@ViewData["MonthNum"]" />
+                                                    @*<select class="form-select" asp-for="t_month" id="t_month">
+                                                            <option value="0" disabled selected>กรุณาเลือก</option>
+                                                            @foreach (var item in displaydata)
+                                                            {
+                                                                @if (item.m_id > 9)
+                                                                {
+                                                                    <option value="@item.m_id">@item.m_name</option>
+                                                                }
+
+                                                            }
+                                                        </select>*@
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group row align-items-center">
+                                                <div class="col-lg-4 col-4">
+                                                    <label class="col-form-label">ปีงบประมาณ: </label>
+                                                </div>
+                                                <div class="col-lg-8 col-8">
+                                                    <input class="form-control" type="text" asp-for="t_year" id="t_year" readonly />
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group row align-items-center">
+                                                <div class="col-lg-4 col-4">
+                                                    <label class="col-form-label">ประเภทผู้ป่วย: </label>
+                                                </div>
+                                                <div class="col-lg-8 col-8">
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="radio" asp-for="type" name="type"
+                                                               id="type" value="2" onclick="checkOther();" disabled>
+                                                        <label class="form-check-label" for="flexRadioDefault1">ผู้ป่วยนอกใหม่</label>
+                                                    </div>
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="radio" asp-for="type" name="type"
+                                                               id="type2" value="1" onclick="checkOther2();" disabled>
+                                                        <label class="form-check-label" for="flexRadioDefault1">ผู้ป่วยนอกเก่า</label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <table class="table" border="1">
+                                        <thead>
+                                            <tr>
+                                                <th class="text-center">ข้อ</th>
+                                                <th class="text-center">รายการ</th>
+                                                <th class="text-center">หน่วยนับ</th>
+                                                <th class="text-center">จำนวน</th>
+                                            </tr>
+                                        </thead>
+                                        <tr>
+                                            <td rowspan="3" class="text-center">1</td>
+                                            <td>จำนวนผู้ป่วยนอกทั้งหมด</td>
+                                            <td rowspan="3" class="text-center">ราย</td>
+                                            <td></td>
+                                        </tr>
+                                        <tr>
+                                            <td>1.1 <label asp-for="t_newpatien" class="control-label"></label></td>
+                                            <td>
+                                                <input asp-for="t_newpatien" class="form-control" readonly />
+                                                <span asp-validation-for="t_newpatien" class="text-danger"></span>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>1.2 <label asp-for="t_oldpatien" class="control-label"></label></td>
+                                            <td>
+                                                <input asp-for="t_oldpatien" class="form-control" readonly />
+                                                <span asp-validation-for="t_oldpatien" class="text-danger"></span>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td rowspan="7" class="text-center">2</td>
+                                            <td>ระยะเวลาการให้บริการแต่ละขั้นตอนในแผนกผู้ป่วยนอก</td>
+                                            <td rowspan="7" class="text-center">นาที</td>
+                                            <td></td>
+                                        </tr>
+                                        <tr>
+                                            <td>2.1 <label asp-for="t_card" class="control-label"></label></td>
+                                            <td>
+                                                <input asp-for="t_card" class="form-control" readonly />
+                                                <span asp-validation-for="t_card" class="text-danger"></span>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>2.2 <label asp-for="t_screen" class="control-label"></label></td>
+                                            <td>
+                                                <input asp-for="t_screen" class="form-control" readonly />
+                                                <span asp-validation-for="t_screen" class="text-danger"></span>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>2.3 <label asp-for="t_waitdoc" class="control-label"></label></td>
+                                            <td>
+                                                <input asp-for="t_waitdoc" class="form-control" readonly />
+                                                <span asp-validation-for="t_waitdoc" class="text-danger"></span>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>2.4 <label asp-for="t_roomdoc" class="control-label"></label></td>
+                                            <td>
+                                                <input asp-for="t_roomdoc" class="form-control" readonly />
+                                                <span asp-validation-for="t_roomdoc" class="text-danger"></span>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>2.5 <label asp-for="t_prescription" class="control-label"></label></td>
+                                            <td>
+                                                <input asp-for="t_prescription" class="form-control" readonly />
+                                                <span asp-validation-for="t_prescription" class="text-danger"></span>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>2.6 <label asp-for="t_waitmed" class="control-label"></label></td>
+                                            <td>
+                                                <input asp-for="t_waitmed" class="form-control" readonly />
+                                                <span asp-validation-for="t_waitmed" class="text-danger"></span>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td rowspan="3" class="text-center">3</td>
+                                            <td>ระยะเวลาการรับยาเดิม</td>
+                                            <td rowspan="3" class="text-center">นาที</td>
+                                            <td></td>
+                                        </tr>
+                                        <tr>
+                                            <td>3.1 <label asp-for="t_med" class="control-label"></label></td>
+                                            <td>
+                                                <input asp-for="t_med" class="form-control" readonly />
+                                                <span asp-validation-for="t_med" class="text-danger"></span>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>3.2 <label asp-for="t_oldmed" class="control-label"></label></td>
+                                            <td>
+                                                <input asp-for="t_oldmed" class="form-control" readonly />
+                                                <span asp-validation-for="t_oldmed" class="text-danger"></span>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="text-center">4</td>
+                                            <td><label asp-for="t_inter" class="control-label"></label></td>
+                                            <td class="text-center">ราย</td>
+                                            <td>
+                                                <input asp-for="t_inter" class="form-control" readonly />
+                                                <span asp-validation-for="t_inter" class="text-danger"></span>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td rowspan="3" class="text-center">5</td>
+                                            <td>ผู้ป่วยใน</td>
+                                            <td class="text-center">นาที</td>
+                                            <td></td>
+                                        </tr>
+                                        <tr>
+                                            <td>5.1 <label asp-for="t_admit" class="control-label"></label></td>
+                                            <td class="text-center">ราย</td>
+                                            <td>
+                                                <input asp-for="t_admit" class="form-control" readonly />
+                                                <span asp-validation-for="t_admit" class="text-danger"></span>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>5.2 <label asp-for="t_prepare_admit" class="control-label"></label></td>
+                                            <td class="text-center">นาที</td>
+                                            <td>
+                                                <input asp-for="t_prepare_admit" class="form-control" readonly />
+                                                <span asp-validation-for="t_prepare_admit" class="text-danger"></span>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </div>
+
+                                <div class="row justify-content-center ">
+                                    <div class="col-md-5">
+
+                                    </div>
+                                    <div class="col-md-2 ">
+                                        <div class="form-group justify-content-center ">
+                                            @if (Model.t_edit == 1)
+                                            {<a asp-controller="Data"
+                                                asp-action="EditData"
+                                                asp-route-id="@Model.t_id" class="btn btn-primary btn-sm text-center ">
+                                                    แก้ไข
+                                                </a>
+                                            }
+
+                                        </div>
+                                    </div>
+                                    <div class="col-md-5">
+
+                                    </div>
+                                </div>
+                            </form>
+                            <div>
+                                <a onclick="window.history.back()" href="#"><< ย้อนกลับ</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

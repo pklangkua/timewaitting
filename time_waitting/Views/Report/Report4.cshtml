@@ -1,0 +1,232 @@
+﻿@model SumpatienModel
+@{
+    var displaydata = ViewData["Datapoint"] as IEnumerable<SumYearModel>;
+    var displaydata2 = ViewData["Datapoint_old"] as IEnumerable<SumYearModel>;
+
+    IEnumerable<hospModel> hosp = ViewData["hosp"] as IEnumerable<hospModel>;
+    IEnumerable<cmonth> cmonth = ViewData["cmonth"] as IEnumerable<cmonth>;
+
+    int oldyear = 2563;
+    int years = (int)ViewData["Date2"];
+   // int oldyear2 = 2562;
+    int years2 = (int)ViewData["Date2"];
+
+}
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        Highcharts.chart('ChartNew', {
+            data: {
+                table: 'tableNew'
+            },
+            chart: {
+                type: 'spline'
+            },
+            title: {
+                text: ''
+            },
+            yAxis: {
+                allowDecimals: false,
+                title: {
+                    text: 'เวลาเฉลี่ย (นาที)'
+                }
+            },
+            tooltip: {
+                formatter: function () {
+                    return '<b>' + this.series.name + '</b><br/>' +
+                        this.point.y + ' ' + this.point.name.toLowerCase();
+                }
+            }
+        });
+    });
+</script>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        Highcharts.chart('ChartOld', {
+            data: {
+                table: 'tableOld'
+            },
+            chart: {
+                type: 'spline'
+            },
+            title: {
+                text: ''
+            },
+            yAxis: {
+                allowDecimals: false,
+                title: {
+                    text: 'เวลาเฉลี่ย (นาที)'
+                }
+            },
+            tooltip: {
+                formatter: function () {
+                    return '<b>' + this.series.name + '</b><br/>' +
+                        this.point.y + ' ' + this.point.name.toLowerCase();
+                }
+            }
+        });
+    });
+</script>
+
+<div class="page-content">
+    <section class="row">
+        <div class="col-12 col-lg-12 ">
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-body px-3 py-4-5">
+                            <div class="row">
+                                <div class="card">
+                                    <form asp-action="Report4">
+                                        <div class="card-header">
+                                            <h4>ค่าเฉลี่ยระยะเวลาบริการของจุดบริการ รายเดือน</h4>
+                                            <p>@ViewData["ReportPoint"]</p>
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <div class="form-group row align-items-center">
+                                                        <div class="col-lg-3 col-3">
+                                                            <label class="control-label">ปีงบประมาณ:</label>
+                                                        </div>
+                                                        <div class="col-lg-9 col-9">
+                                                            <select asp-for="t_year" class="form-select" name="t_year" id="t_year">
+                                                                <option value="0" selected>ทั้งหมด</option>
+                                                                @while (oldyear <= years)
+                                                                {
+                                                                    <option value="@years">@years</option>
+                                                                    years--;
+                                                                }
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="form-group row align-items-md-end">
+                                                        <div class="col-lg-3 col-3">
+                                                            <label class="control-label">จุดบริการ:</label>
+                                                        </div>
+                                                        <div class="col-lg-9 col-9">
+                                                            <select asp-for="point" class="form-select" name="point">
+                                                                <option value="0" selected>ทุกจุดบริการ</option>
+                                                                <option value="t_card">จุดลงทะเบียนที่ห้องบัตร</option>
+                                                                <option value="t_screen">จุดการคัดกรอง</option>
+                                                                <option value="t_waitdoc">จุดรอพบแพทย์</option>
+                                                                <option value="t_roomdoc">จุดในห้องตรวจแพทย์</option>
+                                                                <option value="t_prescription">จุดหลังพบแพทย์จนถึงยื่นใบสั่งยา</option>
+                                                                <option value="t_waitmed">จุดรอรับยา</option>
+                                                                <option value="t_med">จุดรับยาเดิม</option>
+                                                                <option value="t_oldmed">จุดรอรับยาเดิม</option>
+                                                                <option value="t_inter">จุดกรณีได้รับ intervention อื่นๆ (บำบัดรักษา ฟื้นฟูทางจิต สังคม)</option>
+                                                                <option value="t_prepare_admit">จุดการจัดทำ/บริการเพื่อรับไว้รักษา (Admit)</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row justify-content-md-center" >
+                                                <div class="col-md-1 ">
+                                                
+                                                    <input class="btn btn-light-success" type="submit" value="ค้นหา" />
+                                                
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div> @*ค่าเฉลี่ยของระยะเวลาบริการผู้ป่วยจิตเวช รายเดือน*@
+
+<div class="page-content">
+    <section class="row">
+        <div class="col-12 col-lg-6 ">
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-body px-3 py-4-5">
+                            <div class="row">
+                                <div class="card-header">
+                                    <h4>ผู้ป่วยนอกใหม่</h4>
+                                    <div id="ChartNew" style="width:100%; height:400px;"></div>
+                                </div>
+                                <div class="card-body">
+                                    <div class="card-body">
+                                        <h4>รายละเอียด</h4>
+                                        <p>ผู้ป่วยนอกใหม่</p>
+                                        <table id="tableNew" class="table table-striped">
+                                            <thead>
+                                                <tr>
+                                                    <th>จุดบริการ</th>
+                                                    <th>@ViewData["Y1"]</th>
+                                                    @*<th>@ViewData["Y2"]</th>*@
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                @foreach (var item in displaydata) //foreach (var item in displaydata.Zip(displaydata2, (a, b) => new { a, b }))
+                                                {
+                                                    <tr>
+
+                                                        <th>@item.hospname</th>
+                                                        <td>@item.y1</td>
+                                                        @*<td>@item.y2</td>*@
+                                                    </tr>
+                                                }
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-12 col-lg-6 ">
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-body px-3 py-4-5">
+                            <div class="row">
+                                <div class="card-header">
+                                    <h4>ผู้ป่วยนอกเก่า</h4>
+                                    <div id="ChartOld" style="width:100%; height:400px;"></div>
+                                </div>
+                                <div class="card-body">
+                                    <div class="card-body">
+                                        <h4>รายละเอียด</h4>
+                                        <p>ผู้ป่วยนอกเก่า</p>
+                                        <table id="tableOld" class="table table-striped">
+                                            <thead>
+                                                <tr>
+                                                    <th>จุดบริการ</th>
+                                                    <th>@ViewData["Y1"]</th>
+                                                    @*<th>@ViewData["Y2"]</th>*@
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                @foreach (var item in displaydata2) //foreach (var item in displaydata.Zip(displaydata2, (a, b) => new { a, b }))
+                                                {
+                                                    <tr>
+
+                                                        <th>@item.hospname</th>
+                                                        <td>@item.y1</td>
+                                                        @*<td>@item.y2</td>*@
+                                                    </tr>
+                                                }
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </section>
+</div>

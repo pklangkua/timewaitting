@@ -1,0 +1,211 @@
+﻿@model SumpatienModel
+@{
+    var displaydata = ViewData["Sumyear"] as IEnumerable<SumYearModel>;
+    var displaydata2 = ViewData["Sumyear_old"] as IEnumerable<SumYearModel>;
+
+    IEnumerable<hospModel> hosp = ViewData["hosp"] as IEnumerable<hospModel>;
+
+    string hcode = ViewData["hospcode"].ToString();
+
+}
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        Highcharts.chart('ChartNew', {
+            data: {
+                table: 'tableNew'
+            },
+            chart: {
+                type: 'column'
+            },
+            title: {
+                text: ''
+            },
+            yAxis: {
+                allowDecimals: false,
+                title: {
+                    text: 'เวลาเฉลี่ย (นาที)'
+                }
+            },
+            tooltip: {
+                headerFormat: '<span style="font-size:10px">{series.name} {point.key}:</span><table>',
+                pointFormat: '<tr><td style="color:{series.color};padding:0"> </td>' +
+                    '<td style="padding:0"><b>{point.y:.1f} นาที</b></td></tr>',
+                footerFormat: '</table>',
+                shared: true,
+                useHTML: true
+            }
+        });
+    });
+</script>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        Highcharts.chart('ChartOld', {
+            data: {
+                table: 'tableOld'
+            },
+            chart: {
+                type: 'column'
+            },
+            title: {
+                text: ''
+            },
+            yAxis: {
+                allowDecimals: false,
+                title: {
+                    text: 'เวลาเฉลี่ย (นาที)'
+                }
+            },
+            tooltip: {
+                headerFormat: '<span style="font-size:10px">{series.name} {point.key}:</span><table>',
+                pointFormat: '<tr><td style="color:{series.color};padding:0"> </td>' +
+                    '<td style="padding:0"><b>{point.y:.1f} นาที</b></td></tr>',
+                footerFormat: '</table>',
+                shared: true,
+                useHTML: true
+            }
+        });
+    });
+</script>
+
+<div class="page-content">
+    <section class="row">
+        <div class="col-12 col-lg-12 ">
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-body px-3 py-4-5">
+                            <div class="row">
+                                <div class="card">
+                                    <form asp-action="Report2">
+                                        <div class="card-header">
+                                            <h4>ค่าเฉลี่ยรวมระยะเวลาบริการเปรียบเทียบรายปีงบประมาณ @ViewData["hospnames"]</h4>
+                                            <p>เปรียบเทียบปีงบประมาณ</p>
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <div class="form-group row align-items-end">
+                                                        <div class="col-lg-3 col-5">
+                                                            <label class="control-label">หน่วยงาน:</label>
+                                                        </div>
+                                                        <div class="col-lg-9 col-7">
+                                                            @if (hcode == "99999")
+                                                            {
+                                                                <select asp-for="t_hosp" class="form-select" name="t_hosp" id="t_hosp" onchange="this.form.submit()">
+                                                                    <option value="0" selected>ทั้งหมด</option>
+                                                                    @foreach (var item in hosp)
+                                                                    {
+                                                                        <option value="@item.hospcode">@item.hospname</option>
+                                                                    }
+                                                                </select>
+                                                            }
+                                                            else
+                                                            {
+                                                                <label class="control-label">@ViewData["hospname"]</label>
+                                                            }
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </form>
+                                    @*<div class="card-body">
+                                        <div class="card-body">
+                                            <div id="Chart14" style="width:100%; height:400px;"></div>
+                                        </div>
+                                    </div>*@
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div> @*ค่าเฉลี่ยของระยะเวลาบริการผู้ป่วยจิตเวช รายเดือน*@
+
+<div class="page-content">
+    <section class="row">
+        <div class="col-12 col-lg-6 ">
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-body px-3 py-4-5">
+                            <div class="row">
+                                <div class="card-header">
+                                    <h4>ผู้ป่วยนอกใหม่</h4>
+                                    <div id="ChartNew" style="width:100%; height:400px;"></div>
+                                </div>
+                                <div class="card-body">
+                                    <div class="card-body">
+                                        <h4>รายละเอียด</h4>
+                                        <p>ผู้ป่วยนอกใหม่</p>
+                                        <table id="tableNew" class="table table-striped">
+                                            <thead>
+                                                <tr>
+                                                    <th>ปีงบประมาณ</th>
+                                                    <th>ค่าเฉลี่ยรายปีงบประมาณ</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                @foreach (var item in displaydata) //foreach (var item in displaydata.Zip(displaydata2, (a, b) => new { a, b }))
+                                                {
+                                                    <tr>
+
+                                                        <th>@item.years</th>
+                                                        <td>@item.y1</td>
+                                                    </tr>
+                                                }
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-12 col-lg-6 ">
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-body px-3 py-4-5">
+                            <div class="row">
+                                <div class="card-header">
+                                    <h4>ผู้ป่วยนอกเก่า</h4>
+                                    <div id="ChartOld" style="width:100%; height:400px;"></div>
+                                </div>
+                                <div class="card-body">
+                                    <div class="card-body">
+                                        <h4>รายละเอียด</h4>
+                                        <p>ผู้ป่วยนอกเก่า</p>
+                                        <table id="tableOld" class="table table-striped">
+                                            <thead>
+                                                <tr>
+                                                    <th>ปีงบประมาณ</th>
+                                                    <th>ค่าเฉลี่ยรายปีงบประมาณ</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                @foreach (var item in displaydata2) //foreach (var item in displaydata.Zip(displaydata2, (a, b) => new { a, b }))
+                                                {
+                                                    <tr>
+
+                                                        <th>@item.years</th>
+                                                        <td>@item.y1</td>
+                                                    </tr>
+                                                }
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </section>
+</div>

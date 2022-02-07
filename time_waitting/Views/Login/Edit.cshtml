@@ -1,0 +1,129 @@
+﻿@model time_waitting.Models.hcodeModel
+
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    IEnumerable<rightModel> rightdata = ViewData["right"] as IEnumerable<rightModel>;
+    IEnumerable<hospModel> hospdata = ViewData["hosp"] as IEnumerable<hospModel>;
+}
+
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+<script type="text/javascript">
+    function checkData() {
+        if (document.getElementById('hospcode').value == 0) {
+            alert('กรุณากรอกข้อมูลให้ครบและถูกต้อง ');
+            return false;
+        }
+        if (document.getElementById('huser').value == "") {
+            alert('กรุณากรอกข้อมูลให้ครบและถูกต้อง ');
+            return false;
+        }
+        if (document.getElementById('newpass').value == "") {
+            alert('กรุณากรอกข้อมูลให้ครบและถูกต้อง ');
+            return false;
+        }
+        if (document.getElementById('status').value == 0) {
+            alert('กรุณากรอกข้อมูลให้ครบและถูกต้อง ');
+            return false;
+        }
+        if (document.getElementById('fname').value == "") {
+            alert('กรุณากรอกข้อมูลให้ครบและถูกต้อง ');
+            return false;
+        }
+        if (document.getElementById('lname').value == "") {
+            alert('กรุณากรอกข้อมูลให้ครบและถูกต้อง ');
+            return false;
+        }
+    }
+</script>
+<script type="text/javascript">
+    function Validate() {
+        var password = document.getElementById("newpass").value;
+        var confirmPassword = document.getElementById("conpass").value;
+        if (password != confirmPassword) {
+            alert("กรุณากรอกรหัสผ่านให้ตรงกัน");
+            return false;
+        } else if (document.getElementById('fname').value == "" && document.getElementById('lname').value == "")
+        {
+            alert('กรุณากรอกข้อมูลให้ครบและถูกต้อง');
+            return false;
+        }
+    }
+
+</script>
+<div class="card mt-5">
+    <div class="card-header">
+        <h4 class="card-title">การจัดการผู้ใช้งาน</h4>
+    </div>
+    <div class="card-body">
+        <div class="row">
+            <div class="col-md-2"></div>
+            <div class="col-md-4">
+                <form asp-action="Edit" onSubmit="JavaScript: return checkData();">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <div class="form-group">
+                        <label asp-for="hospcode" class="control-label"></label>
+                        <select class="form-control" asp-for="hospcode" id="hcode" disabled>
+                            <option value="" disabled selected>กรุณาเลือก</option>
+                            @foreach (var item in hospdata)
+                            {
+                                <option value="@item.hospcode">@item.hospname</option>
+                            }
+                        </select>
+                        @*<input asp-for="hospcode" class="form-control" />*@
+                        <span asp-validation-for="hospcode" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="huser" class="control-label"></label>
+                        <input asp-for="huser" class="form-control" readonly id="huser" />
+                        <span asp-validation-for="huser" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="hpass" class="control-label"></label>
+                        <input asp-for="hpass" class="form-control" type="password" id="newpass" />
+                        <span asp-validation-for="hpass" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label">ยืนยันรหัสผ่าน</label>
+                        <input name="conpass" id="conpass" class="form-control" type="password" />
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="status" class="control-label"></label>
+                        <select class="form-control" asp-for="status" id="status">
+                            <option value="" disabled selected>กรุณาเลือก</option>
+                            @foreach (var item in rightdata)
+                            {
+                                <option value="@item.id">@item.name</option>
+                            }
+                        </select>
+                        <span asp-validation-for="status" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="fname" class="control-label"></label>
+                        <input asp-for="fname" class="form-control" id="fname" />
+                        <span asp-validation-for="fname" class="text-danger"></span>
+                        <div class="text-danger"> <p>@ViewData["Errorfname"]</p></div>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="lname" class="control-label"></label>
+                        <input asp-for="lname" class="form-control" id="lname" />
+                        <span asp-validation-for="lname" class="text-danger"></span>
+                        <div class="text-danger"> <p>@ViewData["Errorlname"]</p></div>
+                    </div>
+                    <div class="form-group">
+                        <input type="hidden" asp-for="hid" />
+                        <input type="submit" value="แก้ไขผู้ใช้งาน" class="btn btn-primary" onclick="return Validate()" />
+                    </div>
+                </form>
+            </div>
+            <div class="col-md-6"></div>
+            <div>
+                <a onclick="window.history.back()" href="#"><< ย้อนกลับ</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
