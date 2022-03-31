@@ -92,6 +92,7 @@
     function checkOther() {
         document.getElementById("t_newpatien").readOnly = false;
         document.getElementById("t_oldpatien").readOnly = true;
+        document.getElementById("t_oldmed").readOnly = true;
         document.getElementById("t_oldpatien").value = 0;
         document.getElementById("t_newpatien").value = "";
     }
@@ -99,6 +100,7 @@
     function checkOther2() {
         document.getElementById("t_newpatien").readOnly = true;
         document.getElementById("t_oldpatien").readOnly = false;
+        document.getElementById("t_oldmed").readOnly = false;
         document.getElementById("t_newpatien").value = 0;
         document.getElementById("t_oldpatien").value = "";
     }
@@ -263,7 +265,7 @@
                                         </tr>
                                         <tr>
                                             <td rowspan="3" class="text-center">3</td>
-                                            <td>ระยะเวลาการรับยาเดิม</td>
+                                            <td>ระยะเวลาการรับยา</td>
                                             <td rowspan="3" class="text-center">นาที</td>
                                             <td></td>
                                         </tr>
@@ -292,7 +294,7 @@
                                         </tr>
                                         <tr>
                                             <td rowspan="3" class="text-center">5</td>
-                                            <td>ผู้ป่วยใน</td>
+                                            <td>ผู้ป่วยรับไว้รักษา (Admit)</td>
                                             <td class="text-center"></td>
                                             <td></td>
                                         </tr>

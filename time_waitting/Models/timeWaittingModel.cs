@@ -34,7 +34,7 @@ namespace time_waitting.Models
         [Display(Name = "ระยะเวลารอการชำระเงิน")]
         public float t_waitmed { get; set; }
         [Required(ErrorMessage = "กรุณากรอกข้อมูล")]
-        [Display(Name = "ระยะเวลารับยา")]
+        [Display(Name = "ระยะเวลารอรับยา")]
         public float t_med { get; set; }
         [Required(ErrorMessage = "กรุณากรอกข้อมูล")]
         [Display(Name = "ระยะเวลารอรับยาเดิม")]

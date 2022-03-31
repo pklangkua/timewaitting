@@ -2231,3 +2231,4 @@ E:\time_waitting\time_waitting\obj\Release\net5.0\time_waitting.pdb
 E:\time_waitting\time_waitting\obj\Release\net5.0\time_waitting.genruntimeconfig.cache
 D:\time_waitting\time_waitting\obj\Release\net5.0\Razor\Views\Setting\Index.cshtml.g.cs
 D:\time_waitting\time_waitting\obj\Release\net5.0\Razor\Views\Data\ErrorInsert.cshtml.g.cs
+D:\time_waitting\time_waitting\obj\Release\net5.0\Razor\Views\CheckData\Index.cshtml.g.cs

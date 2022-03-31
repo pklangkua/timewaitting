@@ -107,7 +107,7 @@ namespace time_waitting.Controllers
         {
             string sql = @"SELECT SUM(t_newpatien) AS t_newpatien ,SUM(t_oldpatien) AS t_oldpatien 
                         , SUM(t_admit) AS t_admit, ROUND(SUM(t_card + t_screen + t_waitdoc + t_roomdoc + t_prescription +
-                         t_waitmed + t_med + t_oldmed + t_inter + t_prepare_admit) / COUNT(t_id), 2) AS sumtime
+                         t_waitmed + t_med + t_oldmed + t_prepare_admit) / COUNT(t_id), 2) AS sumtime
                         FROM timeWaitting WHERE t_hcode <> 0 ";
             if (t_year == 0 && t_month == 0)
             {
@@ -289,7 +289,7 @@ namespace time_waitting.Controllers
                              ROUND(ROUND(SUM(t_waitmed), 2)/COUNT(t_id),2) AS t_waitmed , 
                              ROUND(ROUND(SUM(t_med), 2)/COUNT(t_id),2) AS t_med , 
                              ROUND(ROUND(SUM(t_oldmed), 2)/COUNT(t_id),2) AS t_oldmed, 
-                             ROUND(ROUND(SUM(t_inter), 2)/COUNT(t_id),2) AS t_inter , 
+                             ROUND(ROUND(SUM(t_inter), 2)/COUNT(t_id),2) AS t_inter,
                              ROUND(ROUND(SUM(t_prepare_admit), 2)/COUNT(t_id),2) AS t_prepare_admit
                             FROM timeWaitting WHERE t_year = '" + date1 + "' AND type = 2  GROUP BY t_year";
 
@@ -328,7 +328,7 @@ namespace time_waitting.Controllers
                              ROUND(ROUND(SUM(t_waitmed), 2)/COUNT(t_id),2) AS t_waitmed , 
                              ROUND(ROUND(SUM(t_med), 2)/COUNT(t_id),2) AS t_med , 
                              ROUND(ROUND(SUM(t_oldmed), 2)/COUNT(t_id),2) AS t_oldmed, 
-                             ROUND(ROUND(SUM(t_inter), 2)/COUNT(t_id),2) AS t_inter , 
+                             ROUND(ROUND(SUM(t_inter), 2)/COUNT(t_id),2) AS t_inter,
                              ROUND(ROUND(SUM(t_prepare_admit), 2)/COUNT(t_id),2) AS t_prepare_admit
                             FROM timeWaitting WHERE t_year = '" + date2 + "' AND type = 2  GROUP BY t_year";
 
@@ -367,7 +367,7 @@ namespace time_waitting.Controllers
                              ROUND(ROUND(SUM(t_waitmed), 2)/COUNT(t_id),2) AS t_waitmed , 
                              ROUND(ROUND(SUM(t_med), 2)/COUNT(t_id),2) AS t_med , 
                              ROUND(ROUND(SUM(t_oldmed), 2)/COUNT(t_id),2) AS t_oldmed, 
-                             ROUND(ROUND(SUM(t_inter), 2)/COUNT(t_id),2) AS t_inter , 
+                             ROUND(ROUND(SUM(t_inter), 2)/COUNT(t_id),2) AS t_inter,
                              ROUND(ROUND(SUM(t_prepare_admit), 2)/COUNT(t_id),2) AS t_prepare_admit
                             FROM timeWaitting WHERE t_year = '" + date1 + "' AND type = 1  GROUP BY t_year";
 
@@ -406,7 +406,7 @@ namespace time_waitting.Controllers
                              ROUND(ROUND(SUM(t_waitmed), 2)/COUNT(t_id),2) AS t_waitmed , 
                              ROUND(ROUND(SUM(t_med), 2)/COUNT(t_id),2) AS t_med , 
                              ROUND(ROUND(SUM(t_oldmed), 2)/COUNT(t_id),2) AS t_oldmed, 
-                             ROUND(ROUND(SUM(t_inter), 2)/COUNT(t_id),2) AS t_inter , 
+                             ROUND(ROUND(SUM(t_inter), 2)/COUNT(t_id),2) AS t_inter,
                              ROUND(ROUND(SUM(t_prepare_admit), 2)/COUNT(t_id),2) AS t_prepare_admit
                             FROM timeWaitting WHERE t_year = '" + date2 + "' AND type = 1  GROUP BY t_year";
 

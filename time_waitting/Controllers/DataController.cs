@@ -502,14 +502,14 @@ namespace time_waitting.Controllers
                     time.type = Convert.ToInt32(dt.Rows[0][19]);
                     time.hname = dt.Rows[0][20].ToString();
                     time.m_name = dt.Rows[0][21].ToString();
-                    if (time.t_edit == 1)
-                    {
-                        return View(time);
-                    }
-                    else
-                    {
-                        return RedirectToAction("ShowData");
-                    }
+                    //if (time.t_edit == 1)
+                    //{
+                       return View(time);
+                    //}
+                    //else
+                    //{
+                    //    return RedirectToAction("ShowData");
+                    //}
 
                 }
                 else

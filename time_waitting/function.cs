@@ -44,7 +44,7 @@ namespace time_waitting
                     break;
 
                 default:
-                    subsql = "ROUND(SUM(t_card + t_screen + t_waitdoc + t_roomdoc + t_prescription + t_waitmed + t_med + t_oldmed + t_inter + t_prepare_admit) / COUNT(t_id) , 2)";
+                    subsql = "ROUND(SUM(t_card + t_screen + t_waitdoc + t_roomdoc + t_prescription + t_waitmed + t_med + t_oldmed + t_prepare_admit) / COUNT(t_id) , 2)";
                     break;
             }
             return subsql;
@@ -171,20 +171,20 @@ namespace time_waitting
                     points = "ระยะเวลาในห้องตรวจแพทย์";
                     break;
                 case "t_prescription":
-                    points = "ระยะเวลาหลังพบแพทย์จนถึงยื่นใบสั่งยา";
+                    points = "ระยะเวลาหลังพบแพทย์";
                     break;
                 case "t_waitmed":
-                    points = "ระยะเวลารอรับยา";
+                    points = "ระยะเวลารอการชำระเงิน";
                     break;
                 case "t_med":
-                    points = "ระยะเวลารับยาเดิม";
+                    points = "ระยะเวลารอรับยา";
                     break;
                 case "t_oldmed":
                     points = "ระยะเวลารอรับยาเดิม";
                     break;
-                case "t_inter":
-                    points = "ระยะเวลากรณีได้รับ intervention อื่นๆ(บำบัดรักษา ฟื้นฟูทางจิต สังคม)";
-                    break;
+                //case "t_inter":
+                //    points = "ระยะเวลากรณีได้รับ intervention อื่นๆ(บำบัดรักษา ฟื้นฟูทางจิต สังคม)";
+                //    break;
                 case "t_prepare_admit":
                     points = "ระยะเวลาในการจัดทำ/บริการเพื่อรับไว้รักษา(Admit)";
                     break;

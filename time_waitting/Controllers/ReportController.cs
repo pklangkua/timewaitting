@@ -425,7 +425,7 @@ namespace time_waitting.Controllers
         {
             List<SumYearModel> sums = new List<SumYearModel>();
             string sql = @"SELECT t_year,ROUND(SUM(t_card + t_screen + t_waitdoc + t_roomdoc + t_prescription + 
-                            t_waitmed + t_med + t_oldmed + t_inter + t_prepare_admit)/COUNT(t_id) , 2)  AS sumtime1
+                            t_waitmed + t_med + t_oldmed + t_prepare_admit)/COUNT(t_id) , 2)  AS sumtime1
                             FROM timeWaitting  WHERE t_hcode<>99999 AND type = 2 ";
             if (t_hosp == 99999)
             {
@@ -458,7 +458,7 @@ namespace time_waitting.Controllers
         {
             List<SumYearModel> sums = new List<SumYearModel>();
             string sql = @"SELECT t_year,ROUND(SUM(t_card + t_screen + t_waitdoc + t_roomdoc + t_prescription + 
-                            t_waitmed + t_med + t_oldmed + t_inter + t_prepare_admit)/COUNT(t_id) , 2)  AS sumtime1
+                            t_waitmed + t_med + t_oldmed + t_prepare_admit)/COUNT(t_id) , 2)  AS sumtime1
                             FROM timeWaitting  WHERE t_hcode<>99999 AND type = 1 ";
             if (t_hosp == 99999)
             {
