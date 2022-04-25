@@ -50,29 +50,31 @@ namespace time_waitting.Controllers
 
             var size = file.Sum(f => f.Length);
             var filePaths = new List<string>();
-
-            foreach (var formFile in file)
+            try
             {
-                if (formFile.Length > 0)
-                {
-                    string FileName = Path.GetRandomFileName() + Path.GetFileNameWithoutExtension(formFile.FileName) + Path.GetExtension(formFile.FileName);
-                    string filePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot\\File", FileName);
-                    var type = Path.GetExtension(formFile.FileName);
-                    //string temp = Path.GetTempFileName(filePath);
-                    if (type != ".txt")
-                    {
-                        ViewBag.ErrorType = "File type not specified ";
-                        return RedirectToAction("Index", "Home");
-                    }
-                    else
-                    {
-                        filePaths.Add(filePath);
-                        using (var strem = new FileStream(filePath, FileMode.Create))
-                        {
-                            await formFile.CopyToAsync(strem);
 
-                            DataTable dt = new DataTable();
-                            dt.Columns.AddRange(new DataColumn[18] {
+                foreach (var formFile in file)
+                {
+                    if (formFile.Length > 0)
+                    {
+                        string FileName = Path.GetRandomFileName() + Path.GetFileNameWithoutExtension(formFile.FileName) + Path.GetExtension(formFile.FileName);
+                        string filePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot\\File", FileName);
+                        var type = Path.GetExtension(formFile.FileName);
+                        //string temp = Path.GetTempFileName(filePath);
+                        if (type != ".txt")
+                        {
+                            ViewBag.ErrorType = "File type not specified ";
+                            return RedirectToAction("Index", "Home");
+                        }
+                        else
+                        {
+                            filePaths.Add(filePath);
+                            using (var strem = new FileStream(filePath, FileMode.Create))
+                            {
+                                await formFile.CopyToAsync(strem);
+
+                                DataTable dt = new DataTable();
+                                dt.Columns.AddRange(new DataColumn[18] {
                                 new DataColumn("t_id", typeof(int)),
                                 new DataColumn("t_newpatien", typeof(int)),
                                 new DataColumn("t_oldpatien",typeof(int)),
@@ -93,55 +95,57 @@ namespace time_waitting.Controllers
                                 new DataColumn("type",typeof(int))
                             });
 
-                            var csvData = new StreamReader(formFile.OpenReadStream());
-                            string[] headers = csvData.ReadLine().Split(','); //ตัด Header ออก
+                                var csvData = new StreamReader(formFile.OpenReadStream());
+                                string[] headers = csvData.ReadLine().Split(','); //ตัด Header ออก
 
-                            while (!csvData.EndOfStream)
-                            {
-                                string[] rows = csvData.ReadLine().Split(',');
-                                dt.Rows.Add(rows);
-                            }
+                                while (!csvData.EndOfStream)
+                                {
+                                    string[] rows = csvData.ReadLine().Split(',');
+                                    if (rows[0] != "")
+                                    {
+                                        dt.Rows.Add(rows);
+                                    }
+                                }
 
-                            SqlBulkCopy sqlBulkCopy = new SqlBulkCopy(sqlconn);
+                                SqlBulkCopy sqlBulkCopy = new SqlBulkCopy(sqlconn);
 
-                            //Set the database table name.
-                            sqlBulkCopy.DestinationTableName = "timeWaitting";
+                                //Set the database table name.
+                                sqlBulkCopy.DestinationTableName = "timeWaitting";
 
-                            //[OPTIONAL]: Map the DataTable columns with that of the database table
-                            sqlBulkCopy.ColumnMappings.Add("t_id", "t_id");
-                            sqlBulkCopy.ColumnMappings.Add("t_newpatien", "t_newpatien");
-                            sqlBulkCopy.ColumnMappings.Add("t_oldpatien", "t_oldpatien");
-                            sqlBulkCopy.ColumnMappings.Add("t_card", "t_card");
-                            sqlBulkCopy.ColumnMappings.Add("t_screen", "t_screen");
-                            sqlBulkCopy.ColumnMappings.Add("t_waitdoc", "t_waitdoc");
-                            sqlBulkCopy.ColumnMappings.Add("t_roomdoc", "t_roomdoc");
-                            sqlBulkCopy.ColumnMappings.Add("t_prescription", "t_prescription");
-                            sqlBulkCopy.ColumnMappings.Add("t_waitmed", "t_waitmed");
-                            sqlBulkCopy.ColumnMappings.Add("t_med", "t_med");
-                            sqlBulkCopy.ColumnMappings.Add("t_oldmed", "t_oldmed");
-                            sqlBulkCopy.ColumnMappings.Add("t_inter", "t_inter");
-                            sqlBulkCopy.ColumnMappings.Add("t_admit", "t_admit");
-                            sqlBulkCopy.ColumnMappings.Add("t_prepare_admit", "t_prepare_admit");
-                            sqlBulkCopy.ColumnMappings.Add("t_hcode", "t_hcode");
-                            sqlBulkCopy.ColumnMappings.Add("t_month", "t_month");
-                            sqlBulkCopy.ColumnMappings.Add("t_year", "t_year");
-                            sqlBulkCopy.ColumnMappings.Add("type", "type");
+                                //[OPTIONAL]: Map the DataTable columns with that of the database table
+                                sqlBulkCopy.ColumnMappings.Add("t_id", "t_id");
+                                sqlBulkCopy.ColumnMappings.Add("t_newpatien", "t_newpatien");
+                                sqlBulkCopy.ColumnMappings.Add("t_oldpatien", "t_oldpatien");
+                                sqlBulkCopy.ColumnMappings.Add("t_card", "t_card");
+                                sqlBulkCopy.ColumnMappings.Add("t_screen", "t_screen");
+                                sqlBulkCopy.ColumnMappings.Add("t_waitdoc", "t_waitdoc");
+                                sqlBulkCopy.ColumnMappings.Add("t_roomdoc", "t_roomdoc");
+                                sqlBulkCopy.ColumnMappings.Add("t_prescription", "t_prescription");
+                                sqlBulkCopy.ColumnMappings.Add("t_waitmed", "t_waitmed");
+                                sqlBulkCopy.ColumnMappings.Add("t_med", "t_med");
+                                sqlBulkCopy.ColumnMappings.Add("t_oldmed", "t_oldmed");
+                                sqlBulkCopy.ColumnMappings.Add("t_inter", "t_inter");
+                                sqlBulkCopy.ColumnMappings.Add("t_admit", "t_admit");
+                                sqlBulkCopy.ColumnMappings.Add("t_prepare_admit", "t_prepare_admit");
+                                sqlBulkCopy.ColumnMappings.Add("t_hcode", "t_hcode");
+                                sqlBulkCopy.ColumnMappings.Add("t_month", "t_month");
+                                sqlBulkCopy.ColumnMappings.Add("t_year", "t_year");
+                                sqlBulkCopy.ColumnMappings.Add("type", "type");
 
-                            sqlconn.Open();
-                            try
-                            {
+                                sqlconn.Open();
+
                                 sqlBulkCopy.WriteToServer(dt);
-                            }
-                            catch (Exception)
-                            {
-                                return RedirectToAction("ErrorInsert", "Data");
-                            }
-                            
-                            sqlconn.Close();
 
+                                sqlconn.Close();
+
+                            }
                         }
                     }
                 }
+            }
+            catch (Exception)
+            {
+                return RedirectToAction("ErrorInsert", "Data");
             }
             return RedirectToAction("Index", "Home");
         }
@@ -504,7 +508,7 @@ namespace time_waitting.Controllers
                     time.m_name = dt.Rows[0][21].ToString();
                     //if (time.t_edit == 1)
                     //{
-                       return View(time);
+                    return View(time);
                     //}
                     //else
                     //{
