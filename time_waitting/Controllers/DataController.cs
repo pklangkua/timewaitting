@@ -423,7 +423,6 @@ namespace time_waitting.Controllers
                 return RedirectToAction("Index", "Login");
             }
         }
-
         public ActionResult Edit(int? id)
         {
             if (HttpContext.Session.GetString("hospcode") != null)
@@ -620,6 +619,53 @@ namespace time_waitting.Controllers
 
             ViewData["Check"] = date.CheckDate(); ;
             return View();
+        }
+
+        public ActionResult DeleteData()
+        {
+            if (HttpContext.Session.GetString("hospcode") != null)
+            {
+                string fname = HttpContext.Session.GetString("fname");
+                string lname = HttpContext.Session.GetString("lname");
+                ViewData["fullname"] = fname + " " + lname;
+                ViewData["hospname"] = HttpContext.Session.GetString("hospname");
+                ViewData["status"] = Convert.ToString(HttpContext.Session.GetInt32("status"));
+                ViewData["ShowData"] = DataDisplay();
+                return View();
+            }
+            else
+            {
+                return RedirectToAction("Index", "Login");
+            }
+        }
+
+        [HttpPost]
+        public ActionResult DeleteData( int[] t_id)
+        {
+            if (HttpContext.Session.GetString("hospcode") != null)
+            {
+                string fname = HttpContext.Session.GetString("fname");
+                string lname = HttpContext.Session.GetString("lname");
+                ViewData["fullname"] = fname + " " + lname;
+                ViewData["hospname"] = HttpContext.Session.GetString("hospname");
+                ViewData["status"] = Convert.ToString(HttpContext.Session.GetInt32("status"));
+                ViewData["ShowData"] = DataDisplay();
+
+                sqlconn.Open();
+                for (int i = 0; i < t_id.Length; i++)
+                {
+                    string sql = @"DELETE FROM timeWaitting WHERE t_id=@t_id";
+                    SqlCommand sqlcomm = new SqlCommand(sql, sqlconn);
+
+                    sqlcomm.Parameters.AddWithValue("@t_id", t_id[i]);
+                    sqlcomm.ExecuteNonQuery();
+                }
+                return RedirectToAction("DeleteData");
+            }
+            else
+            {
+                return RedirectToAction("Index", "Login");
+            }
         }
     }
 }

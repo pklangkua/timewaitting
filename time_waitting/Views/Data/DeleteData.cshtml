@@ -1,0 +1,85 @@
+﻿@model IEnumerable<time_waitting.Models.timeWaittingModel>
+@{
+    IEnumerable<timeWaittingModel> displaydata = ViewData["ShowData"] as IEnumerable<timeWaittingModel>;
+    ViewData["Title"] = "Data";
+
+}
+
+<div class="card mt-5">
+    <div class="card-header">
+        <h4 class="card-title">รายละเอียด</h4>
+    </div>
+    <div class="card-body">
+        <div class="data-table-area">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                        <div class="data-table-list">
+                            <!--<div class="basic-tb-hd">
+                            <h2>รายละเอียดข้อมูล</h2>-->
+                            @*<p>It's just that simple. Turn your simple table into a sophisticated data table and offer your users a nice experience and great features without any effort.</p>*@
+                            <!--</div>-->
+                            <div class="table-responsive">
+                                <form asp-action="DeleteData">
+                                    <table id="table1" class="table table-striped">
+                                        <thead>
+                                            <tr>
+                                                <th>ลบ</th>
+                                                <th>หน่วยงาน</th>
+                                                <th>ปีงบประมาณ</th>
+                                                <th>เดือน</th>
+                                                <th>วันที่นำเข้า</th>
+                                                <th>ประเภทผู้ป่วย</th>
+                                                <th>รายละเอียด</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @foreach (var item in displaydata)
+                                            {
+                                                <tr>
+                                                    <td><input id="@item.t_id" type="checkbox" name="t_id" value="@item.t_id" class="form-check" /></td>
+                                                    <td>@item.hname [@item.t_hcode]</td>
+                                                    <td>@item.t_year</td>
+                                                    <td>@item.m_name</td>
+                                                    <td>@item.t_date</td>
+                                                    <td>
+                                                        @if (item.type == 1)
+                                                        {
+                                                            <p>ผู้ป่วยเก่า </p>
+                                                        }
+                                                        else
+                                                        {
+                                                            <p>ผู้ป่วยใหม่</p>
+                                                        }
+                                                    </td>
+                                                    <td>
+                                                        <a asp-controller="Data"
+                                                           asp-action="Detail"
+                                                           asp-route-id="@item.t_id" class="btn btn-success btn-sm ">รายละเอียด</a>
+                                                    </td>
+                                                </tr>
+                                            }
+                                        </tbody>
+                                        <tfoot>
+                                            <tr>
+                                                @if (ViewData["status"].ToString() == "2")
+                                                {
+                                                    <th>หน่วยงาน</th>
+                                                }
+                                                <th>ปีงบประมาณ</th>
+                                                <th>เดือน</th>
+                                                <th>วันที่นำเข้า</th>
+                                                <th>รายละเอียด</th>
+                                            </tr>
+                                        </tfoot>
+                                    </table>
+                                    <p></p> <input type="submit" value="ลบข้อมูล" class="btn btn-success" />
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

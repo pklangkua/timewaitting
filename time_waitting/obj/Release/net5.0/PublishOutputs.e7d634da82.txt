@@ -1678,6 +1678,7 @@ D:\time_waitting\time_waitting\obj\Release\net5.0\PubTmp\Out\wwwroot\assets\vend
 D:\time_waitting\time_waitting\obj\Release\net5.0\PubTmp\Out\wwwroot\assets\vendors\toastify\toastify.css
 D:\time_waitting\time_waitting\obj\Release\net5.0\PubTmp\Out\wwwroot\assets\vendors\toastify\toastify.js
 D:\time_waitting\time_waitting\obj\Release\net5.0\PubTmp\Out\wwwroot\File\1critkfu.v5p7.1 สเด็ก มค 2565_error.txt
+D:\time_waitting\time_waitting\obj\Release\net5.0\PubTmp\Out\wwwroot\File\2s4ew4c1.gkp40915psywait04072022.txt
 D:\time_waitting\time_waitting\obj\Release\net5.0\PubTmp\Out\wwwroot\File\3mysperu.wox8.สมเด็จ Edit.txt
 D:\time_waitting\time_waitting\obj\Release\net5.0\PubTmp\Out\wwwroot\File\3tzhl535.w2a7.1 สเด็ก มค 2565.txt
 D:\time_waitting\time_waitting\obj\Release\net5.0\PubTmp\Out\wwwroot\File\3x40dvly.ijh7.1 สเด็ก มค 2565.txt
@@ -1701,6 +1702,7 @@ D:\time_waitting\time_waitting\obj\Release\net5.0\PubTmp\Out\wwwroot\File\drhw55
 D:\time_waitting\time_waitting\obj\Release\net5.0\PubTmp\Out\wwwroot\File\fkyb1xnl.yon5. ศรีธัญญา แก้ไข.txt
 D:\time_waitting\time_waitting\obj\Release\net5.0\PubTmp\Out\wwwroot\File\foiiew4q.fgwvqcg1qtw.rlnTime.txt
 D:\time_waitting\time_waitting\obj\Release\net5.0\PubTmp\Out\wwwroot\File\g4t13okl.jaxTime.txt
+D:\time_waitting\time_waitting\obj\Release\net5.0\PubTmp\Out\wwwroot\File\gtprwjum.lyhNew.txt
 D:\time_waitting\time_waitting\obj\Release\net5.0\PubTmp\Out\wwwroot\File\izq5qka1.f4a7.1 สเด็ก มค 2565.txt
 D:\time_waitting\time_waitting\obj\Release\net5.0\PubTmp\Out\wwwroot\File\kjhuxtid.jvl4.สวนปรุง - ใหม่.txt.สวนปรุง.txt
 D:\time_waitting\time_waitting\obj\Release\net5.0\PubTmp\Out\wwwroot\File\knuwwyiv.iw07.1 สเด็ก มค 2565_error.txt
@@ -1711,6 +1713,7 @@ D:\time_waitting\time_waitting\obj\Release\net5.0\PubTmp\Out\wwwroot\File\mygbsi
 D:\time_waitting\time_waitting\obj\Release\net5.0\PubTmp\Out\wwwroot\File\nxorxrmb.mv3buid11fb.sotTime.txt
 D:\time_waitting\time_waitting\obj\Release\net5.0\PubTmp\Out\wwwroot\File\ogdq04mj.mit7.1 สเด็ก มค 2565.txt
 D:\time_waitting\time_waitting\obj\Release\net5.0\PubTmp\Out\wwwroot\File\omnjjnjo.s3s5. ศรีธัญญา แก้ไข.txt
+D:\time_waitting\time_waitting\obj\Release\net5.0\PubTmp\Out\wwwroot\File\phz4uv33.otlNew.txt
 D:\time_waitting\time_waitting\obj\Release\net5.0\PubTmp\Out\wwwroot\File\q3ro3spg.lrg7.1 สเด็ก มค 2565_error.txt
 D:\time_waitting\time_waitting\obj\Release\net5.0\PubTmp\Out\wwwroot\File\rspjgjt4.hzn8.สมเด็จ Edit.txt
 D:\time_waitting\time_waitting\obj\Release\net5.0\PubTmp\Out\wwwroot\File\rt42eqz5.c2d7.1 สเด็ก มค 2565.txt
@@ -1719,10 +1722,12 @@ D:\time_waitting\time_waitting\obj\Release\net5.0\PubTmp\Out\wwwroot\File\s24cic
 D:\time_waitting\time_waitting\obj\Release\net5.0\PubTmp\Out\wwwroot\File\s2bv5mew.vm27.สเด็กและวัยรุ่น.txt
 D:\time_waitting\time_waitting\obj\Release\net5.0\PubTmp\Out\wwwroot\File\s5k0uogy.lwk10.ราชา.txt
 D:\time_waitting\time_waitting\obj\Release\net5.0\PubTmp\Out\wwwroot\File\sel0j5t3.gjf8.สมเด็จ Edit.txt
+D:\time_waitting\time_waitting\obj\Release\net5.0\PubTmp\Out\wwwroot\File\sw3jk2af.siyNew.txt
 D:\time_waitting\time_waitting\obj\Release\net5.0\PubTmp\Out\wwwroot\File\te2hpcms.kpd7.1 สเด็ก มค 2565.txt
 D:\time_waitting\time_waitting\obj\Release\net5.0\PubTmp\Out\wwwroot\File\ttraagxg.p4lvqcg1qtw.rlnTime.txt
 D:\time_waitting\time_waitting\obj\Release\net5.0\PubTmp\Out\wwwroot\File\usj5gwfx.mwl7.1 สเด็ก มค 2565_error.txt
 D:\time_waitting\time_waitting\obj\Release\net5.0\PubTmp\Out\wwwroot\File\vckfycie.5fbvqcg1qtw.rlnTime.txt
+D:\time_waitting\time_waitting\obj\Release\net5.0\PubTmp\Out\wwwroot\File\vg401gbi.1ml40915psywait04072022.txt
 D:\time_waitting\time_waitting\obj\Release\net5.0\PubTmp\Out\wwwroot\File\vnlherrl.y1o8.สมเด็จ Edit.txt
 D:\time_waitting\time_waitting\obj\Release\net5.0\PubTmp\Out\wwwroot\File\w40tmp0n.xtw7.1 สเด็ก มค 2565.txt
 D:\time_waitting\time_waitting\obj\Release\net5.0\PubTmp\Out\wwwroot\File\wahlka00.sep8.สมเด็จ Edit.txt

@@ -51,8 +51,8 @@ namespace time_waitting.Controllers
                     HttpContext.Session.SetInt32("hid", sdr.GetInt32(6));
 
                     //HttpContext.Session.SetString("Username", obj.UserName);
-                    ViewData["hospcode"] = HttpContext.Session.GetString("hospcode");
-                    ViewData["hospname"] = HttpContext.Session.GetString("hospname");
+                    /*ViewData["hospcode"] = HttpContext.Session.GetString("hospcode");
+                    ViewData["hospname"] = HttpContext.Session.GetString("hospname");*/
                     // ViewData["chiefoff"] = HttpContext.Session.GetString("chiefoff");
 
                     sqlconn.Close();
